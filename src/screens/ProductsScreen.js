@@ -1,10 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Button, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const CategoriesScreen = () => {
+const CategoriesScreen = ({ navigation }) => {
     return (
     <View style={styles.screen} >
-        <Text>ProducutsScreen</Text>
+        <Text style={styles.text}>ProducutsScreen</Text>
+        <Button title='Ir a detalles' onPress={() => {
+            navigation.navigate('Details')
+            }} />
     </View>
     )
 }
@@ -16,5 +19,10 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    text: {
+        fontFamily: 'JosefinSans_400Regular',
+        fontSize: 20,
+        paddingBottom: 20,
     }
 })

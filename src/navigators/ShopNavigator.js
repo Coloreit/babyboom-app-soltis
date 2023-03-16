@@ -14,7 +14,7 @@ const ShopNavigator = () => {
             <Stack.Navigator initialRouteName='Home'>
                 <Stack.Screen name='Home' component={CategoriesScreen}/>
                 <Stack.Screen name='ProductsList' component={ProductsScreen}/>
-                <Stack.Screen name='Detail' component={DetailScreen}/>
+                <Stack.Screen name='Details' component={DetailScreen}/>
             </Stack.Navigator>
         </NavigationContainer>
     )

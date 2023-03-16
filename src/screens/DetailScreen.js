@@ -4,7 +4,7 @@ import React from 'react'
 const CategoriesScreen = () => {
     return (
     <View style={styles.screen} >
-        <Text>DetailScreen</Text>
+        <Text style={styles.text}>DetailScreen</Text>
     </View>
     )
 }
@@ -16,5 +16,10 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    text: {
+        fontFamily: 'JosefinSans_400Regular',
+        fontSize: 20,
+        paddingBottom: 20,
     }
 })
