@@ -1,14 +1,29 @@
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { Button, FlatList, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import ProductItem from '../components/ProductItem'
 
-const CategoriesScreen = ({ navigation }) => {
+import { PRODUCTS } from '../data/products'
+
+const CategoriesScreen = ({ navigation, route }) => {
+
+    const { categoryId } = route.params
+    
+    const products = PRODUCTS.filter(prod => prod.category === categoryId)
+
+    const handleOnSelected = (item) => {
+        navigation.navigate('Details', {
+            baby: item
+        })
+    }
+
+    const renderProductItem = ({ item }) => (<ProductItem item={item} onSelected={handleOnSelected} />)
+
     return (
-    <View style={styles.screen} >
-        <Text style={styles.text}>ProducutsScreen</Text>
-        <Button title='Ir a detalles' onPress={() => {
-            navigation.navigate('Details')
-            }} />
-    </View>
+        <FlatList 
+            data={products}
+            keyExtractor={(item) => item.id}
+            renderItem={renderProductItem}
+        />
     )
 }
 

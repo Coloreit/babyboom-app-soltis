@@ -1,28 +1,27 @@
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { FlatList } from 'react-native'
 import React from 'react'
+import GridItem from '../components/GridItem'
+import { CATEGORIES } from '../data/categories'
 
 const CategoriesScreen = ({ navigation }) => {
+
+    const onSelectGridItem = (item) => {
+        navigation.navigate('Products', {
+            categoryId: item.id,
+            categoryName: item.title
+        })
+    }
+
+    const renderGridItem = ({ item }) => <GridItem item={item} onSelect={onSelectGridItem} />
+
     return (
-    <View style={styles.screen} >
-        <Text style={styles.text}>CategoriesScreen</Text>
-        <Button title='Ir a productos' onPress={() => {
-            navigation.navigate('ProductsList')
-            }} />
-    </View>
+        <FlatList
+            data={CATEGORIES}
+            keyExtractor={(item) => item.id}
+            renderItem={renderGridItem}
+            numColumns={2}
+        />
     )
 }
 
 export default CategoriesScreen
-
-const styles = StyleSheet.create({
-    screen: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    text: {
-        fontFamily: 'JosefinSans_400Regular',
-        fontSize: 20,
-        paddingBottom: 20
-    }
-})
