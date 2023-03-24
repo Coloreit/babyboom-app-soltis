@@ -11,7 +11,6 @@ const Stack = createNativeStackNavigator();
 
 const ShopNavigator = () => {
     return (
-        <NavigationContainer>
         <Stack.Navigator initialRouteName="Home"
             screenOptions={{
                 headerStyle: {
@@ -42,7 +41,6 @@ const ShopNavigator = () => {
                 component={DetailScreen}
                 />
         </Stack.Navigator>
-    </NavigationContainer>
     )
 }
 

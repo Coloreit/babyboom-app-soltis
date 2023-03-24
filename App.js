@@ -1,7 +1,7 @@
 import React from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts, JosefinSans_400Regular, JosefinSans_700Bold } from '@expo-google-fonts/josefin-sans';
-import ShopNavigator from './src/navigators/ShopNavigator';
+import MainNavegator from './src/navigators/MainNavegator';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -23,6 +23,6 @@ export default function App() {
   }
 
   return (
-    <ShopNavigator />
+    <MainNavegator />
   );
 }
