@@ -2,8 +2,10 @@ import { StyleSheet, Text, View } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { COLORS } from '../constants/colors';
 import ShopNavigator from './ShopNavigator';
 import CartNavigator from './CartNavigator';
+import OrdersScreen from '../screens/OrdersScreen';
 
 const BottomTabs = createBottomTabNavigator();
 
@@ -20,8 +22,8 @@ const TabsNavigator = () => {
             options={{
                 tabBarIcon: ({ focused }) => (
                     <View style={styles.tabBarIcon}>
-                        <Ionicons name='md-home' size={24} color={focused ? '#34c4cc' : '#f9bdd7'}/>
-                        <Text style={{ color: focused ? '#34c4cc' : '#f9bdd7' }}>Shop</Text>
+                        <Ionicons name='md-home' size={24} color={focused ? COLORS.celeste : COLORS.rosa}/>
+                        <Text style={{ color: focused ? COLORS.celeste : COLORS.rosa }}>Shop</Text>
                     </View>
                 )
             }}
@@ -30,8 +32,18 @@ const TabsNavigator = () => {
             options={{
                 tabBarIcon: ({ focused }) => (
                     <View style={styles.tabBarIcon}>
-                        <Ionicons name='md-cart' size={24} color={focused ? '#34c4cc' : '#f9bdd7'}/>
-                        <Text style={{ color: focused ? '#34c4cc' : '#f9bdd7' }}>Cart</Text>
+                        <Ionicons name='md-cart' size={24} color={focused ? COLORS.celeste : COLORS.rosa}/>
+                        <Text style={{ color: focused ? COLORS.celeste : COLORS.rosa }}>Cart</Text>
+                    </View>
+                )
+            }}
+        />
+        <BottomTabs.Screen name='Orders-tab' component={OrdersScreen}
+            options={{
+                tabBarIcon: ({ focused }) => (
+                    <View style={styles.tabBarIcon}>
+                        <Ionicons name='md-list' size={24} color={focused ? COLORS.celeste : COLORS.rosa}/>
+                        <Text style={{ color: focused ? COLORS.celeste : COLORS.rosa }}>Ordenes</Text>
                     </View>
                 )
             }}
