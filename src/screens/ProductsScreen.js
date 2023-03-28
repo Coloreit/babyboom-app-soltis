@@ -1,18 +1,23 @@
-import { Button, FlatList, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { FlatList, StyleSheet } from 'react-native'
+import React, { useEffect } from 'react'
 import ProductItem from '../components/ProductItem'
-
-import { PRODUCTS } from '../data/products'
+import { useSelector, useDispatch } from 'react-redux'
+import { selectedProduct, filterProduct } from '../store/actions/products.action'
 
 const CategoriesScreen = ({ navigation, route }) => {
 
-    const { categoryId } = route.params
-    
-    const products = PRODUCTS.filter(prod => prod.category === categoryId)
+    const dispatch = useDispatch();
+    const categoryProducts = useSelector(state => state.products.filteredProducts)
+    const category = useSelector(state => state.categories.selected)
+
+    useEffect(()=>{
+        dispatch(filterProduct(category.id))
+    },[])
 
     const handleOnSelected = (item) => {
+        dispatch(selectedProduct(item.id))
         navigation.navigate('Details', {
-            baby: item
+            name:item.title
         })
     }
 
@@ -20,8 +25,8 @@ const CategoriesScreen = ({ navigation, route }) => {
 
     return (
         <FlatList 
-            data={products}
-            keyExtractor={(item) => item.id}
+            data={categoryProducts}
+            keyExtractor={(item) => item.id.toString()}
             renderItem={renderProductItem}
         />
     )
@@ -29,15 +34,4 @@ const CategoriesScreen = ({ navigation, route }) => {
 
 export default CategoriesScreen
 
-const styles = StyleSheet.create({
-    screen: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    text: {
-        fontFamily: 'JosefinSans_400Regular',
-        fontSize: 20,
-        paddingBottom: 20,
-    }
-})
+const styles = StyleSheet.create({ })

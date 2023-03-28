@@ -1,24 +1,19 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react'
+import React from 'react'
+import { useSelector } from 'react-redux'
 
-const DetailScreen = ({ route, navigation }) => {
+const DetailScreen = ({ }) => {
 
-    const { baby } = route.params
-
-    useEffect(() => {
-        navigation.setOptions({
-            title: baby.name
-        })
-    }, [])
+    const product = useSelector(state => state.products.selected)
 
     return (
     <View style={styles.screen} >
-        <Text style={styles.title}>{baby.name}</Text>
+        <Text style={styles.title}>{product.name}</Text>
         <Text style={styles.text}>FOTO</Text>
         <Text style={styles.textSub}>Precio:</Text>
-        <Text style={styles.text}>${baby.price}</Text>
+        <Text style={styles.text}>${product.price}</Text>
         <Text style={styles.textSub}>Descripción:</Text>
-        <Text style={styles.text}>{baby.description}</Text>
+        <Text style={styles.text}>{product.description}</Text>
     </View>
     )
 }

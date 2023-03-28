@@ -30,10 +30,9 @@ export const ORDERS = [
             {
                 id: '4',
                 category: '2',
-                name: 'Pan de Molde harina integral de centeno',
-                description: 'Pan de Molde harina integral de centeno',
-                weight: '500 gr',
-                price: 3200,
+                name: 'Jabón',
+                description: 'Marca Petit Enfant bebé',
+                price: 350,
                 quantity: 2
             }
         ]
