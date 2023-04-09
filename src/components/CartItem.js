@@ -10,7 +10,7 @@ const CartItem = ({ item, onDelete }) => {
             <Text style={styles.text}> ${item.price} </Text>
             <Text style={styles.text}> x{item.quantity} </Text>
         </View>
-        <TouchableOpacity onPress={() => onDelete(item)}>
+        <TouchableOpacity onPress={() => onDelete(item.id)}>
             <Ionicons name='md-trash' size={24} color='red'/>
         </TouchableOpacity>
     </View>
@@ -21,17 +21,17 @@ export default CartItem
 
 const styles = StyleSheet.create({
     item: {
-        flex: 1,
-        padding: 8,
-        borderBottomWidth: 1,
-        borderBottomColor: '#ccc',
+        flex:1,
+        padding:8,
+        borderBottomWidth:1,
+        borderBottomColor: '#ccc'
     },
     header: {
         fontSize: 18,
         fontFamily: 'JosefinSans_700Bold'
     },
     detail: {
-        flex: 1,
+        flex:1,
         flexDirection: 'row',
         flexWrap: 'wrap',
         alignItems: 'center',
