@@ -2,11 +2,16 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Ionicons } from '@expo/vector-icons'
 
+const formatDay = (time) => {
+    const date= new Date(time)
+    return date.toLocaleDateString();
+}
+
 const OrderItems = ({ item, onDelete }) => {
     return (
     <View style={styles.order}>
         <View>
-            <Text style={styles.date}> {item.date.toLocaleDateString()} </Text>
+            <Text style={styles.date}> {formatDay(item.date)} </Text>
             <Text style={styles.total}> $ {item.total} </Text>
         </View>
         <TouchableOpacity onPress={() => onDelete(item)}>
