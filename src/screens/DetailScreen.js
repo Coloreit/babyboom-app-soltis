@@ -1,10 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Button, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { addItem } from '../store/actions/cart.action'
 
-const DetailScreen = ({ }) => {
+const DetailScreen = () => {
 
     const product = useSelector(state => state.products.selected)
+    const dispatch = useDispatch();
+    const onHandleAddToCart = () => {
+        dispatch(addItem({...product, quantity:1}))
+    }
 
     return (
     <View style={styles.screen} >
@@ -14,6 +19,9 @@ const DetailScreen = ({ }) => {
         <Text style={styles.text}>${product.price}</Text>
         <Text style={styles.textSub}>Descripción:</Text>
         <Text style={styles.text}>{product.description}</Text>
+        <Button title='Agregar producto' onPress={() => {
+            onHandleAddToCart()
+        }}/>
     </View>
     )
 }

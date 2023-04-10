@@ -2,7 +2,7 @@ import { CART } from "../../data/cart";
 import { ADD_ITEM, REMOVE_ITEM, CONFIRM_CART } from "../actions/cart.action";
 
 const INITIAL_STATE = {
-    items: CART,
+    items: [],
     total: 0,
 }
 
