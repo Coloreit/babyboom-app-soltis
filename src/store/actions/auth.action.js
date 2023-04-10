@@ -17,14 +17,20 @@ export const signUp = (email, password) => {
                 }),
             });
             const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error.message);
+            }
+
             console.log(data);
+
             dispatch({
                 type: SIGN_UP,
                 token: data.idToken,
                 userId: data.localId,
             })
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 }
