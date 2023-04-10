@@ -1,6 +1,7 @@
 import { API_URL } from '../../constants/Database'
 
 export const GET_ORDERS = 'GET_ORDERS';
+export const DELETE_ORDER = 'DELETE_ORDER';
 
 export const getOrders = () => {
     return async dispatch => {
@@ -24,6 +25,27 @@ export const getOrders = () => {
             dispatch({
                 type: GET_ORDERS,
                 orders
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+export const deleteOrder = (id) => {
+    return async dispatch => {
+        try {
+            const response = await fetch(`${API_URL}/ordenes/${id}.json`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const resData = await response.json();
+            console.log(resData);
+            dispatch({
+                type: DELETE_ORDER,
+                id
             });
         } catch (error) {
             console.log(error);

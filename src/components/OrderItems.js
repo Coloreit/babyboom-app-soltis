@@ -14,7 +14,7 @@ const OrderItems = ({ item, onDelete }) => {
             <Text style={styles.date}> {formatDay(item.date)} </Text>
             <Text style={styles.total}> $ {item.total} </Text>
         </View>
-        <TouchableOpacity onPress={() => onDelete(item)}>
+        <TouchableOpacity onPress={() => onDelete(item.id)}>
             <Ionicons name='md-trash' size={24} color='red'/>
         </TouchableOpacity>
     </View>
