@@ -40,6 +40,9 @@ const CartReducer = (state = INITIAL_STATE, action) => {
             }
 
         case CONFIRM_CART:
+            return {
+                ...state,
+            }
 
         default:
             return state;
