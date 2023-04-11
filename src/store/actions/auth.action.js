@@ -2,7 +2,7 @@ import { SIGN_UP_URL } from '../../constants/Database'
 
 export const SIGN_UP = 'SIGN_UP';
 
-export const signUp = (email, password) => {
+export const signup = (email, password) => {
     return async dispatch => {
         try {
             const response = await fetch(SIGN_UP_URL, {
@@ -16,13 +16,18 @@ export const signUp = (email, password) => {
                     returnSecureToken: true,
                 }),
             });
-            const data = await response.json();
 
             if (!response.ok) {
-                throw new Error(data.error.message);
+                const errorResponse = await response.json();
+                const errorId = errorResponse.error.message;
+
+                let message = 'No se ha podido registar';
+                if (errorId === 'EMAIL_EXIST') message= 'Este email ya está registrado';
+
+                throw new Error(message);
             }
 
-            console.log(data);
+            const data = await response.json();
 
             dispatch({
                 type: SIGN_UP,

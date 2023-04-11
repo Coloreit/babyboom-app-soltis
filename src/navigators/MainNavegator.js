@@ -1,4 +1,3 @@
-import { StyleSheet } from 'react-native'
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import TabsNavigator from './TabsNavigator'
@@ -17,5 +16,3 @@ const MainNavegator = () => {
 }
 
 export default MainNavegator
-
-const styles = StyleSheet.create({})

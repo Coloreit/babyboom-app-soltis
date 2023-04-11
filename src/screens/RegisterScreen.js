@@ -1,52 +1,122 @@
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Alert, KeyboardAvoidingView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { COLORS } from '../constants/colors'
 import { useDispatch } from 'react-redux'
-import { signUp } from '../store/actions/auth.action'
+import { signup } from '../store/actions/auth.action'
+import Input from '../components/Input'
+
+const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
+
+export const formReducer = (state, action) => {
+    if (action.type === FORM_INPUT_UPDATE) {
+        const inputValues = {
+            ...state.inputValues,
+            [action.input]: action.value,
+        }
+        const inputValidities = {
+            ...state.inputValidities,
+            [action.input]: action.isValid,
+        }
+        let formIsValid = true;
+
+        for (const key in inputValidities) {
+            formIsValid = formIsValid && inputValidities[key];
+        }
+        return {
+            formIsValid,
+            inputValidities,
+            inputValues
+        }
+    }
+    return state;
+}
 
 const RegisterScreen = () => {
 
     const dispatch = useDispatch();
 
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
+    // const isAuthLoading = useSelector(state => state.auth.isLoading);
 
-    onHandleRegister = () => {
-        dispatch(signUp(email, password))
+    const [formState, formDispatch] = React.useReducer(formReducer, {
+        inputValues: {
+            email: '',
+            password: '',
+        },
+        inputValidities: {
+            email: false,
+            password: false,
+        },
+        formIsValid: false,
+    });
+
+
+    const onHandleRegister = () => {
+        if (formState.formIsValid) {
+            dispatch(signup(formState.inputValues.email, formState.inputValues.password));
+        } else {
+            Alert.alert(
+                'Formulario inválido',
+                'Ingrese mail y/o contraseña válido',
+                [{ text: 'OK' }]
+            );
+        }
     }
 
+    const onInputChangeHandler = React.useCallback((inputIdentifier, inputValue, inputValidity) => {
+        formDispatch({
+            type: FORM_INPUT_UPDATE,
+            value: inputValue,
+            isValid: inputValidity,
+            input: inputIdentifier,
+        })
+    }, [formDispatch]);
+
     return (
-    <KeyboardAvoidingView style={styles.screen} behavior='padding'>
-        <View style={styles.container}>
-            <Text style={styles.title}>REGISTRO</Text>
-            <View style={styles.form}>
-                <Text style={styles.label}>Email</Text>
-                <TextInput style={styles.textInput} 
-                    autoCapitalize='none'
-                    keyboardType='email-address'
-                    onChangeText={setEmail}
-                />
-                <Text style={styles.label}>Contraseña</Text>
-                <TextInput style={styles.textInput} 
-                    onChangeText={setPassword}
-                    secureTextEntry
-                    autoCapitalize='none'
-                    placeholder='Debe contener al menos 6 caracteres'
-                />
-                <TouchableOpacity style={styles.loginButton} onPress={onHandleRegister}>
-                    <Text style={styles.loginButtonText}>Registrarse</Text>
-                </TouchableOpacity>
+        <KeyboardAvoidingView style={styles.screen} behavior="padding">
+            <View style={styles.container}>
+                <Text style={styles.title}>REGISTRO</Text>
+                <View style={styles.form}>
+                    <Input
+                        style={styles.textInput}
+                        initialValue={formState.inputValues.email}
+                        initiallyValid={formState.inputValidities.email}
+                        onInputChange={onInputChangeHandler}
+                        id='email'
+                        required
+                        email
+                        label='Email'
+                        errorText='Por favor, ingrese un email válido'
+                        autoCapitalize='none'
+                        keyboardType='email-address'
+                    />
+                    <Input
+                        style={styles.textInput}
+                        initialValue={formState.inputValues.password}
+                        initiallyValid={formState.inputValidities.password}
+                        onInputChange={onInputChangeHandler}
+                        id='password'
+                        required
+                        minLength={5}
+                        label='Contraseña'
+                        errorText='Por favor, ingrese una contraseña válida'
+                        autoCapitalize='none'
+                        keyboardType='email-address'
+                        secureTextEntry
+                    />
+                    <TouchableOpacity style={styles.loginButton} onPress={onHandleRegister}>
+                        <Text style={styles.loginButtonText}>Registrarse</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.prompt}>
+                    <Text style={styles.promptMessage}>
+                        ¿Ya tienes una cuenta?
+                    </Text>
+                    <TouchableOpacity>
+                        <Text style={styles.promptButton}>Iniciar sesión</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-            <View style={styles.prompt}>
-                <Text style={styles.promptMessage}>
-                    ¿Ya tenes una cuenta?
-                </Text>
-                <TouchableOpacity>
-                    <Text style={styles.promptButton}>Iniciar Sesión</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    </KeyboardAvoidingView>
+        </KeyboardAvoidingView>
     )
 }
 
