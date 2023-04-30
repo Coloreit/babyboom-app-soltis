@@ -11,23 +11,24 @@ const NewPlaceScreen = ({ navigation }) => {
   const dispatch = useDispatch()
   const [titleValue, setTitleValue] = React.useState('')
   const [imageValue, setImageValue] = React.useState('')
+  const [locationValue, setLocationValue] = React.useState()
 
   const titleChangeHandler = text => {
     setTitleValue(text)
   }
 
   const savePlaceHandler = () => {
-    dispatch(addPlace(titleValue, imageValue))
+    dispatch(addPlace(titleValue, imageValue, locationValue))
     navigation.navigate('Direcciones')
   }
-
+  
   return (
     <ScrollView>
       <View style={styles.container}>
         <Text style={styles.label}>Nueva dirección</Text>
         <TextInput style={styles.input} onChangeText={titleChangeHandler} />
         <ImageSelector onImage={image=>setImageValue(image)} />
-        <LocationService onLocation={(lat, lng)=>console.log({lat, lng})}/>
+        <LocationService onLocation={(lat, lng)=>setLocationValue({lat, lng})}/>
         <Button title="Guardar" color={COLORS.celeste} onPress={savePlaceHandler} />
       </View>
     </ScrollView>

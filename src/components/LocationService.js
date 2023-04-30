@@ -3,8 +3,21 @@ import React from 'react'
 import { COLORS } from '../constants/Colors';
 import * as Location from 'expo-location'
 import MapPreview from './MapPreview';
+import { useNavigation, useRoute } from '@react-navigation/native'
 
 const LocationService = ({ onLocation }) => {
+
+    const navigation = useNavigation()
+    const route = useRoute()
+
+    const mapLocation = route.params?.mapLocation;
+
+    React.useEffect(() => {
+        if (mapLocation) {
+            setLocation(mapLocation)
+            onLocation(mapLocation.lat, mapLocation.lng)
+        }
+    }, [mapLocation])
 
     const [location, setLocation] = React.useState(null)
 
@@ -23,6 +36,13 @@ const LocationService = ({ onLocation }) => {
         onLocation(location.coords.latitude, location.coords.longitude)
     }
 
+    const handlePickOnMap = async() => {
+        const hasPermission = await verifyGeolocationPermission()
+        if (!hasPermission) return
+    
+        navigation.navigate('Map')
+    }
+
     const verifyGeolocationPermission = async () => {
         let { status } = await Location.requestForegroundPermissionsAsync()
         if (status !== 'granted') {
@@ -39,6 +59,7 @@ const LocationService = ({ onLocation }) => {
         </MapPreview>
         <View style={styles.actions}>
             <Button title='Obtener Ubicación' color={COLORS.naranja} onPress={handleGeolocation} />
+            <Button title='Elegir en el mapa' color={COLORS.verde} onPress={handlePickOnMap} />
         </View>
     </View>
     )
