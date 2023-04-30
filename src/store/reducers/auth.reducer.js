@@ -5,7 +5,7 @@ const initialState = {
     userId: null,
 }
 
-const authReducer = (state = initialState, action) => {
+const AuthReducer = (state = initialState, action) => {
     switch (action.type) {
         case SIGN_UP:
             return {
@@ -18,4 +18,4 @@ const authReducer = (state = initialState, action) => {
     }
 }
 
-export default authReducer;
+export default AuthReducer;

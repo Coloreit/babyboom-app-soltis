@@ -36,17 +36,17 @@ const EnviosNavigator = () => {
         })}
         />
         <Stack.Screen 
-        name="Detalle"
+        name='Detalle'
         component={PlaceDetailScreen}
         options={{ title: 'Detalle direccion' }}
         />
         <Stack.Screen 
-        name="Nuevo"
+        name='Nuevo'
         component={NewPlaceScreen}
         options={{ title: 'Nueva direccion' }}
         />
         <Stack.Screen 
-        name="Map"
+        name='Map'
         component={MapScreen}
         options={{ title: 'Mapa' }}
         />

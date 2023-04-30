@@ -4,7 +4,7 @@ const INITIAL_STATE = {
     list: []
 }
 
-const ordersReducer = (state = INITIAL_STATE, action) => {
+const OrdersReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case GET_ORDERS:
             return {
@@ -21,4 +21,4 @@ const ordersReducer = (state = INITIAL_STATE, action) => {
     }
 }
 
-export default ordersReducer;
+export default OrdersReducer;
