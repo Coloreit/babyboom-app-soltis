@@ -6,7 +6,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { COLORS } from '../constants/colors';
 import ShopNavigator from './ShopNavigator';
 import CartNavigator from './CartNavigator';
-import OrdersScreen from '../screens/OrdersScreen';
+import OrdersNavigator from './OrdersNavigator';
+import EnviosNavigator from './EnviosNavigator'
 
 const BottomTabs = createBottomTabNavigator();
 
@@ -39,7 +40,7 @@ const TabsNavigator = () => {
                 )
             }}
         />
-        <BottomTabs.Screen name='Orders-tab' component={OrdersScreen}
+        <BottomTabs.Screen name='Orders-tab' component={OrdersNavigator}
             options={{
                 tabBarIcon: ({ focused }) => (
                     <View style={styles.tabBarIcon}>
@@ -49,7 +50,16 @@ const TabsNavigator = () => {
                 )
             }}
         />
-        
+        <BottomTabs.Screen name='Envios-tab' component={EnviosNavigator}
+            options={{
+                tabBarIcon: ({ focused }) => (
+                    <View style={styles.tabBarIcon}>
+						<MaterialCommunityIcons name="truck-fast" size={28} color={focused ? COLORS.celeste : COLORS.rosa}/>
+                        <Text style={{ color: focused ? COLORS.celeste : COLORS.rosa }}>Envíos</Text>
+                    </View>
+                )
+            }}
+        />
     </BottomTabs.Navigator>
     )
 }

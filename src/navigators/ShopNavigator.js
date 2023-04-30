@@ -1,5 +1,4 @@
 import React from 'react'
-import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import CategoriesScreen from '../screens/CategoriesScreen'
@@ -39,6 +38,9 @@ const ShopNavigator = () => {
             <Stack.Screen
                 name='Details'
                 component={DetailScreen}
+                options={{
+                    title: 'Detalles del producto'
+                    }}
                 />
         </Stack.Navigator>
     )
