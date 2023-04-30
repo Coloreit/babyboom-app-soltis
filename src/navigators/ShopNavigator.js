@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import CategoriesScreen from '../screens/CategoriesScreen'
 import ProductsScreen from '../screens/ProductsScreen'
 import DetailScreen from '../screens/DetailScreen'
-import { COLORS } from '../constants/colors'
+import { COLORS } from '../constants/Colors'
 
 const Stack = createNativeStackNavigator();
 

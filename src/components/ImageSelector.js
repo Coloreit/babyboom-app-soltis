@@ -1,7 +1,7 @@
 import { Alert, Button, Image, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import * as ImagePicker from 'expo-image-picker'
-import { COLORS } from '../constants/colors'
+import { COLORS } from '../constants/Colors'
 
 const ImageSelector = ({onImage}) => {
 

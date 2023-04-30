@@ -3,7 +3,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { COLORS } from '../constants/colors';
+import { COLORS } from '../constants/Colors';
 import ShopNavigator from './ShopNavigator';
 import CartNavigator from './CartNavigator';
 import OrdersNavigator from './OrdersNavigator';

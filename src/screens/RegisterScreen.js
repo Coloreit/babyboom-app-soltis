@@ -1,6 +1,6 @@
 import { Alert, KeyboardAvoidingView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { COLORS } from '../constants/colors'
+import { COLORS } from '../constants/Colors'
 import { useDispatch } from 'react-redux'
 import { signup } from '../store/actions/auth.action'
 import Input from '../components/Input'
