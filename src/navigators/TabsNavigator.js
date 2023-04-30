@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { COLORS } from '../constants/colors';
@@ -48,6 +49,7 @@ const TabsNavigator = () => {
                 )
             }}
         />
+        
     </BottomTabs.Navigator>
     )
 }

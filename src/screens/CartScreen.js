@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import CartItem from '../components/CartItem';
@@ -10,11 +10,16 @@ const CartScreen = () => {
     const total = useSelector(state=>state.cart.total)
 
     const onHandleConfirm = () => {
-        console.log('Confirmar');
-        dispatch(confirmCart(cart, total))
+        if (total === 0) {
+			Alert.alert('No hay productos en el carrito')
+		} else {
+            console.log('Confirmar');
+            dispatch(confirmCart(cart, total))
+            Alert.alert('Orden creada')
+		}
     }
     const onHandleDeleteItem=(itemId)=>{
-        console.log("Eliminar item");
+        console.log('Eliminar item');
         dispatch(removeItem(itemId))
     }
 

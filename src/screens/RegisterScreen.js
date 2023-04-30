@@ -51,6 +51,7 @@ const RegisterScreen = () => {
 
 
     const onHandleRegister = () => {
+        console.log(formState)
         if (formState.formIsValid) {
             dispatch(signup(formState.inputValues.email, formState.inputValues.password));
         } else {

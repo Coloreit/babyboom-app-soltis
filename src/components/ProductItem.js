@@ -28,10 +28,10 @@ const styles = StyleSheet.create({
     },
     title: {
         fontFamily: 'JosefinSans_700Bold',
-        fontSize: 20,
+        fontSize: 22,
     },
     details: {
         fontFamily: 'JosefinSans_400Regular',
-        fontSize: 15,
+        fontSize: 16,
     }
 })

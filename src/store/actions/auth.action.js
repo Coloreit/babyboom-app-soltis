@@ -21,7 +21,7 @@ export const signup = (email, password) => {
                 const errorResponse = await response.json();
                 const errorId = errorResponse.error.message;
 
-                let message = 'No se ha podido registar';
+                let message = 'No se ha podido registrar';
                 if (errorId === 'EMAIL_EXIST') message= 'Este email ya está registrado';
 
                 throw new Error(message);
