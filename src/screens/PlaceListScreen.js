@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const EnviosScreen = () => {
+const PlaceListScreen = () => {
     return (
         <View>
-            <Text>Para programar un envío de su última compra presione en el signo +</Text>
+            <Text>PlaceListScreen</Text>
         </View>
     )
 }
 
-export default EnviosScreen
+export default PlaceListScreen
 
 const styles = StyleSheet.create({})

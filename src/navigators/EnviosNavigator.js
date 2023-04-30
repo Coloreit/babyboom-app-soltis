@@ -1,8 +1,13 @@
-import { StyleSheet, Platform } from 'react-native'
+import { Platform, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { COLORS } from '../constants/colors';
-import EnviosScreen from '../screens/EnviosScreen';
+import { Ionicons } from '@expo/vector-icons';
+
+import PlaceListScreen from '../screens/PlaceListScreen';
+import PlaceDetailScreen from '../screens/PlaceDetailScreen.js';
+import NewPlaceScreen from '../screens/NewPlaceScreen.js';
+import MapScreen from '../screens/MapScreen.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,20 +20,38 @@ const EnviosNavigator = () => {
         },
         headerTintColor: Platform.OS === 'android' ? 'white' : COLORS.celeste,
         headerTitleStyle: {
-        fontFamily: 'JosefinSans_700Bold'
+            fontFamily: 'JosefinSans_700Bold'
         }
     }}>
         <Stack.Screen 
-        name='Envios' 
-        component={EnviosScreen}
-        options={{
-            title: 'Envíos'
-        }}
+        name='Direcciones'
+        component={PlaceListScreen}
+        options={({ navigation }) => ({
+            title: 'Envíos',
+            headerRight: () => (
+                <TouchableOpacity onPress={() => navigation.navigate('Nuevo')}>
+                    <Ionicons name='md-add' color={Platform.OS === 'android' ? 'white' : COLORS.celeste} size={23} />
+                </TouchableOpacity>
+            )
+        })}
+        />
+        <Stack.Screen 
+        name="Detalle"
+        component={PlaceDetailScreen}
+        options={{ title: 'Detalle direccion' }}
+        />
+        <Stack.Screen 
+        name="Nuevo"
+        component={NewPlaceScreen}
+        options={{ title: 'Nueva direccion' }}
+        />
+        <Stack.Screen 
+        name="Map"
+        component={MapScreen}
+        options={{ title: 'Mapa' }}
         />
     </Stack.Navigator>
     )
 }
 
 export default EnviosNavigator
-
-const styles = StyleSheet.create({})
