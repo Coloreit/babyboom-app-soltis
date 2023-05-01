@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
   },
   address: {
     color: COLORS.celeste,
+    fontFamily: 'JosefinSans_400Regular',
     textAlign: 'center'
   },
   map: {
