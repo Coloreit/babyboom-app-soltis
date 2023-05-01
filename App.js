@@ -4,8 +4,18 @@ import { useFonts, JosefinSans_400Regular, JosefinSans_700Bold } from '@expo-goo
 import MainNavegator from './src/navigators/MainNavegator';
 import { Provider } from 'react-redux';
 import store from './src/store';
+import { init } from './src/db';
 
 SplashScreen.preventAutoHideAsync();
+
+init().then(
+  () => {
+    console.log('Initialized database');
+  }
+).catch(err => {
+  console.log('Initializing db failed.');
+  console.log(err);
+});
 
 export default function App() {
 

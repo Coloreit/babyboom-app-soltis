@@ -1,5 +1,6 @@
 import * as FileSystem from 'expo-file-system';
 import STATIC_MAP_API_KEY from '../../constants/keys';
+import { insertAddress } from '../../db';
 
 export const ADD_PLACE = 'ADD_PLACE'
 export const LOAD_PLACES = 'LOAD_PLACES'
@@ -33,9 +34,11 @@ export const addPlace = (title, image, location) => {
             throw error
         }
 
+        const dbResult = await insertAddress(title, Path, address, location.lat, location.lng)
+        
         dispatch({
             type: ADD_PLACE, 
-            payload: {
+            payload: {id:dbResult.insertId,
                 title, 
                 image: Path, 
                 address, 
