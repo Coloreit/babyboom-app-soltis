@@ -1,6 +1,6 @@
 import * as FileSystem from 'expo-file-system';
 import STATIC_MAP_API_KEY from '../../constants/keys';
-import { insertAddress } from '../../db';
+import { insertAddress, fetchAddress } from '../../db';
 
 export const ADD_PLACE = 'ADD_PLACE'
 export const LOAD_PLACES = 'LOAD_PLACES'
@@ -35,6 +35,7 @@ export const addPlace = (title, image, location) => {
         }
 
         const dbResult = await insertAddress(title, Path, address, location.lat, location.lng)
+        console.log(dbResult);
         
         dispatch({
             type: ADD_PLACE, 
@@ -46,5 +47,17 @@ export const addPlace = (title, image, location) => {
                 lng: location.lng
             }
         })
+    }
+}
+
+export const loadPlaces = () => {
+    return async dispatch => {
+        try {
+            const dbResult = await fetchAddress()
+            console.log('Db result: ',dbResult.rows._array)
+            dispatch({type: LOAD_PLACES, payload: {places: dbResult.rows._array}})
+        } catch (error) {
+            throw error
+        }
     }
 }

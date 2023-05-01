@@ -14,6 +14,11 @@ const PlacesReducer = (state = initialState, action) => {
                 ...state,
                 places: state.places.concat(newPlace)
             }
+        case LOAD_PLACES:
+            return{
+                ...state,
+                places: action.payload.places.map(pl => new Place(pl.id.toString(), pl.title, pl.image, pl.address, pl.lat, pl.lng))
+            }
         default:
             return state
     }

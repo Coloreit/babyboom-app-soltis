@@ -2,8 +2,14 @@ import React from 'react'
 import { FlatList} from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import PlaceItem from '../components/PlaceItem'
+import { loadPlaces } from '../store/actions/places.action'
 
 const PlaceListScreen = ({navigation}) => {
+
+    const dispatch = useDispatch()
+    React.useEffect(()=>{
+        dispatch(loadPlaces())
+    },[])
 
     const places = useSelector(state=>state.places.places)
     
