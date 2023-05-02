@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 20,
     fontFamily: 'JosefinSans_400Regular',
-    marginBottom: 16
+    marginBottom: 10,
   },
   input: {
     borderBottomColor: '#ccc',

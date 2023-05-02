@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, TextInput } from 'react-native'
 import React, { useReducer, useEffect } from 'react'
+import { COLORS } from '../constants/Colors'
 
 const INPUT_CHANGE = "INPUT_CHANGE";
 const INPUT_BLUR = "INPUT_BLUR";
@@ -102,6 +103,6 @@ const styles = StyleSheet.create({
     },
     errorText: {
         fontFamily: 'JosefinSans_700Bold',
-        color: 'red',
+        color: COLORS.naranja,
     }
 })

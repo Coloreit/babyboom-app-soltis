@@ -2,8 +2,9 @@ import { Alert, KeyboardAvoidingView, StyleSheet, Text, TouchableOpacity, View }
 import React from 'react'
 import { COLORS } from '../constants/Colors'
 import { useDispatch } from 'react-redux'
-import { signup } from '../store/actions/auth.action'
+import { login, signup } from '../store/actions/auth.action'
 import Input from '../components/Input'
+import { Image } from 'react-native'
 
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
 
@@ -35,8 +36,6 @@ const RegisterScreen = () => {
 
     const dispatch = useDispatch();
 
-    // const isAuthLoading = useSelector(state => state.auth.isLoading);
-
     const [formState, formDispatch] = React.useReducer(formReducer, {
         inputValues: {
             email: '',
@@ -49,11 +48,23 @@ const RegisterScreen = () => {
         formIsValid: false,
     });
 
-
     const onHandleRegister = () => {
         console.log(formState)
         if (formState.formIsValid) {
             dispatch(signup(formState.inputValues.email, formState.inputValues.password));
+        } else {
+            Alert.alert(
+                'Formulario inválido',
+                'Ingrese mail y/o contraseña válido',
+                [{ text: 'OK' }]
+            );
+        }
+    }
+
+    const onHandleLogin = () => {
+        console.log(formState)
+        if (formState.formIsValid) {
+            dispatch(login(formState.inputValues.email, formState.inputValues.password));
         } else {
             Alert.alert(
                 'Formulario inválido',
@@ -75,7 +86,9 @@ const RegisterScreen = () => {
     return (
         <KeyboardAvoidingView style={styles.screen} behavior="padding">
             <View style={styles.container}>
+                <Image source={require('../img/favicon.png')} style={styles.image}/>
                 <Text style={styles.title}>REGISTRO</Text>
+                
                 <View style={styles.form}>
                     <Input
                         style={styles.textInput}
@@ -101,19 +114,16 @@ const RegisterScreen = () => {
                         label='Contraseña'
                         errorText='Por favor, ingrese una contraseña válida'
                         autoCapitalize='none'
-                        keyboardType='email-address'
+                        keyboardType='default'
                         secureTextEntry
                     />
-                    <TouchableOpacity style={styles.loginButton} onPress={onHandleRegister}>
-                        <Text style={styles.loginButtonText}>Registrarse</Text>
+
+                    <TouchableOpacity style={styles.loginButton} onPress={onHandleLogin}>
+                        <Text style={styles.loginButtonText}>Acceder</Text>
                     </TouchableOpacity>
-                </View>
-                <View style={styles.prompt}>
-                    <Text style={styles.promptMessage}>
-                        ¿Ya tienes una cuenta?
-                    </Text>
-                    <TouchableOpacity>
-                        <Text style={styles.promptButton}>Iniciar sesión</Text>
+
+                    <TouchableOpacity style={styles.registerButton} onPress={onHandleRegister}>
+                        <Text style={styles.loginButtonText}>Registrarse</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -129,11 +139,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    image: {
+        width: 60,
+        height: 60,
+        alignSelf: 'center',
+    },
     title: {
         fontSize: 24,
         fontFamily: 'JosefinSans_700Bold',
         marginBottom: 12,
         textAlign: 'center',
+        color: COLORS.naranja,
     },
     container: {
         width: '80%',
@@ -166,6 +182,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         height: 40,
         backgroundColor: COLORS.celeste,
+        marginVertical: 12,
+    },
+    registerButton:{
+        width: '100%',
+        justifyContent: 'center',
+        height: 40,
+        backgroundColor: COLORS.verde,
         marginVertical: 12,
     },
     loginButtonText: {
